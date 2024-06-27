@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="desktop-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-symbol">M</div>
+                <h2>Motiv.</h2>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Assets</a></li>
+                    <li><a href="#">Booking</a></li>
+                    <li><a href="#">Sell Cars</a></li>
+                    <li><a href="#">Buy Cars</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Calendar</a></li>
+                    <li><a href="#">Messages</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#">Settings</a>
+                <a href="#">Log out</a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <input type="text" placeholder="Search or type">
+                <div class="header-icons">
+                    <i class="fas fa-bell"></i>
+                    <img src="vaibhavi img.jpg" alt="Profile" class="profile">
+                </div>
+            </header>
+            <section class="dashboard-content"> 
+                <div class="left-column">
+                    <div class="assets-section">
+                        <h2>Assets</h2>
+                        <div class="asset-details">
+                            <div class="asset-info">
+                                <p>Fuel Usage: <strong>2903.89 Ltr</strong></p>
+                                <p>KM Driven: <strong>2903.89 Ltr</strong></p>
+                                <p>Total Cost: <strong>$3,00,290.00</strong></p>
+                                <p>Top Speed: <strong>$5.2K</strong></p>
+                            </div>
+                            <div class="asset-image">
+                                <img src="car.png" alt="Car Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <section class="activity">
+                        <h2>Activity</h2>
+                        <div class="chart">
+                            <canvas id="activity-chart"></canvas>
+                            <p>Traveled last month <strong>50 Km</strong></p>
+                        </div>
+                    </section>
+                    <div class="grid-container">
+                        <section class="info-card notices-card">
+                            <h3>Notices</h3>
+                            <ul>
+                                <li>
+                                    <p>Monday, 6th April 2020</p>
+                                    <span>Book for General Service</span>
+                                    <span class="status completed">COMPLETED</span>
+                                </li>
+                                <li>
+                                    <p>Thursday, 24th October 2021</p>
+                                    <span>Vehicle LV 001 has been marked for recall.</span>
+                                    <span class="status">14:07-21/11/2021</span>
+                                </li>
+                                <li>
+                                    <p>Monday, 13th August 2018</p>
+                                    <span>Maintenance Completed, Collect</span>
+                                    <span class="status">14:07-21/11/2021</span>
+                                </li>
+                            </ul>
+                        </section>
+                        <section class="info-card sensors-card">
+                            <h3>Available Sensors</h3>
+                            <ul>
+                                <li><input type="checkbox" checked> Asset - Fuel Consumed (10)</li>
+                                <li><input type="checkbox"> Asset - Odometer (km)</li>
+                                <li><input type="checkbox"> Asset - Runtime (hr)</li>
+                                <li><input type="checkbox"> Asset - Speed (hr)</li>
+                                <li><input type="checkbox"> Engine Temperature (deg C)</li>
+                            </ul>
+                            <button>See All</button>
+                        </section>
+                    </div>
+                    <section class="info-card reminder-card">
+                        <h3>Reminder</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Due</th>
+                                    <th>Overdue</th>
+                                    <th>Notify</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Urgent Safety Recall</td>
+                                    <td>06/04/2022</td>
+                                    <td>08/04/2022</td>
+                                    <td>David Demo</td>
+                                    <td>Completed</td>
+                                </tr>
+                                <tr>
+                                    <td>Urgent Safety Recall</td>
+                                    <td>06/04/2022</td>
+                                    <td>08/04/2022</td>
+                                    <td>David Demo</td>
+                                    <td>Completed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button>+ Add New</button>
+                    </section>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // JavaScript code to create the chart
+        document.addEventListener("DOMContentLoaded", function() {
+            // Data for the chart (example data)
+            const data = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Distance traveled (km)',
+                    backgroundColor: '#8e54e9',
+                    borderColor: '#7340b3',
+                    borderWidth: 1,
+                    data: [50, 80, 60, 100, 75, 90], // Example data for each month
+                }]
+            };
+    
+            // Configuration options for the chart
+            const options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+    
+            // Get the canvas element
+            const ctx = document.getElementById('activity-chart').getContext('2d');
+    
+            // Create the chart
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: options
+            });
+        });
+    </script>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>
